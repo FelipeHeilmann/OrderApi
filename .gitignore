@@ -1,0 +1,6 @@
+.vs/
+obj/
+Infra/bin
+Domain/bin
+Application/bin
+API/bin
