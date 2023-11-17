@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Domain.Order.Entitiy
+namespace Domain.order.entitiy
 {
-    class OrderProduct
+    public class OrderProduct
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
+
+        public OrderProduct() { }
 
         public OrderProduct(Guid id, Guid orderId, Guid prooductId, Product product, int quantity)
         {
