@@ -12,7 +12,7 @@ namespace Domain.order.entity
         public Guid Id { get; private set; }
         public List<OrderProduct> Products { get; private set; }
         public StatusEnum Status { get; private set; }
-        public Double Total { get; private set; }
+        public double Total { get; set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
@@ -29,7 +29,7 @@ namespace Domain.order.entity
 
         public static Order Create()
         {
-            return new Order(new Guid(), new List<OrderProduct>(), StatusEnum.created, new DateTime(), new DateTime());
+            return new Order(Guid.NewGuid(), new List<OrderProduct>(), StatusEnum.created, DateTime.UtcNow, DateTime.UtcNow);
         }
 
         public void AddItem(OrderProduct product)

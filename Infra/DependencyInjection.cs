@@ -1,5 +1,6 @@
 ﻿using Application.gateway;
 using Application.repository;
+using Application.usecase.order;
 using Application.usecase.product;
 using Azure.Storage.Blobs;
 using Infra.context;
@@ -30,6 +31,7 @@ namespace Infra
 
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration) {
             services.AddScoped<ProductRepository, ProductRepositoryDatabase>();
+            services.AddScoped<OrderRepository, OrderRepositoryDatabase>();
             services.AddScoped<SaveImage, AzureSaveImage>();
             
             services.AddScoped<GetAllProducts>();
@@ -37,6 +39,9 @@ namespace Infra
             services.AddScoped<CreateProduct>();
             services.AddScoped<UpdateProduct>();
             services.AddScoped<DeleteProduct>();
+
+            services.AddScoped<GetAllOrders>();
+            services.AddScoped<CreateOrder>();
             services.AddScoped<UploadImage>();
 
             return services;

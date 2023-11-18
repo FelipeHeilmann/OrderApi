@@ -1,6 +1,7 @@
 ﻿using Application.repository;
 using Domain.order.entity;
 using Infra.context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,12 @@ namespace Infra.repository
             throw new NotImplementedException();
         }
 
-        public Task<List<Order>> GetAll()
+        public async Task<List<Order>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _contex.Orders
+                .Include(order => order.Products)
+                    .ThenInclude(orderProduct => orderProduct.Product)
+                .ToListAsync();
         }
 
         public async Task Save(Order order)

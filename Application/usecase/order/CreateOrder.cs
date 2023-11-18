@@ -10,14 +10,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.usecase
+namespace Application.usecase.order
 {
     public class CreateOrder
     {
         private readonly OrderRepository _repository;
         private readonly ProductRepository _productRepository;
 
-        public CreateOrder(OrderRepository repository, ProductRepository productRepository) {
+        public CreateOrder(OrderRepository repository, ProductRepository productRepository)
+        {
             _productRepository = productRepository;
             _repository = repository;
         }
@@ -30,6 +31,7 @@ namespace Application.usecase
             foreach (var orderProduct in request)
             {
                 var product = await _productRepository.Get(orderProduct.ProductId);
+                order.Total += Math.Round(product.Price * orderProduct.Quantity, 2);
                 order.AddItem(OrderProduct.Create(order.Id, product.Id, product, orderProduct.Quantity));
             }
 
