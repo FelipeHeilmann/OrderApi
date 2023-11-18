@@ -31,7 +31,7 @@ namespace Infra.repository
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            if(product == null)
+            if(product is null)
             {
                 throw new NotFoundError("Product not found");
             }

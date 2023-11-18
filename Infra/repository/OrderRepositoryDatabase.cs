@@ -1,4 +1,5 @@
-﻿using Application.repository;
+﻿using Application.errors;
+using Application.repository;
 using Domain.order.entity;
 using Infra.context;
 using Microsoft.EntityFrameworkCore;
@@ -17,22 +18,27 @@ namespace Infra.repository
 
         public OrderRepositoryDatabase(ApplicationContext contex) => _contex = contex;
 
-        public Task Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Order> Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<Order>> GetAll()
         {
             return await _contex.Orders
                 .Include(order => order.Products)
                     .ThenInclude(orderProduct => orderProduct.Product)
                 .ToListAsync();
+        }
+
+        public async Task<Order> Get(Guid id)
+        {
+            var order = await _contex.Orders
+                .Include(order => order.Products)
+                    .ThenInclude(orderProduct => orderProduct.Product)
+                .FirstAsync(order => order.Id == id);
+
+            if(order is null)
+            {
+                throw new NotFoundError("Order was not found");
+            }
+
+            return order;
         }
 
         public async Task Save(Order order)
@@ -42,6 +48,11 @@ namespace Infra.repository
         }
 
         public Task Update(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete(Guid id)
         {
             throw new NotImplementedException();
         }

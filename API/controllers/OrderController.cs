@@ -13,10 +13,17 @@ namespace API.controllers
     {
         private readonly CreateOrder _create;
         private readonly GetAllOrders _getAll;
+        private readonly GetOrderById _getById;
 
-        public OrderController(CreateOrder create, GetAllOrders getAll) {
+        public OrderController(
+            CreateOrder create, 
+            GetAllOrders getAll, 
+            GetOrderById getById
+            )
+        {
             _create = create;
             _getAll = getAll;
+            _getById = getById;
         }
 
         [HttpGet]
@@ -25,6 +32,14 @@ namespace API.controllers
             var orders = await _getAll.Execute();
 
             return Ok(orders);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Order>> Get(Guid id) 
+        {
+            var order = await _getById.Execute(id);
+
+            return Ok(order);
         }
 
         

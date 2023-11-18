@@ -41,6 +41,7 @@ namespace Infra
             services.AddScoped<DeleteProduct>();
 
             services.AddScoped<GetAllOrders>();
+            services.AddScoped<GetOrderById>();
             services.AddScoped<CreateOrder>();
             services.AddScoped<UploadImage>();
 
