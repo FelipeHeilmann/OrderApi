@@ -1,6 +1,8 @@
-﻿using Application.repository;
+﻿using Application.dto;
+using Application.repository;
 using Domain.order.entity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +15,13 @@ namespace Application.usecase.order
         private readonly OrderRepository _repository;
         public GetAllOrders(OrderRepository repository) => _repository = repository;
 
-        public async Task<List<Order>> Execute()
+        public async Task<ICollection<OrderResponse>> Execute()
         {
-            var products = await _repository.GetAll();
+            var orders = await _repository.GetAll();
 
-            return products;
+            var ordersResponse = (ICollection<OrderResponse>)orders.Select(order => new OrderResponse(order.Id,order.Total,order.Status, order.Products.Select(product => new OrderProductResponse(product.ProductId, product.Product.Name, product.Product.Description, product.Product.Price, product.Product.ImagePath, product.Quantity)).ToList()));
+
+            return ordersResponse;
         }
     }
 }

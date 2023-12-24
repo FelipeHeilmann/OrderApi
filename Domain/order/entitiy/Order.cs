@@ -10,7 +10,7 @@ namespace Domain.order.entity
     public class Order
     {
         public Guid Id { get; private set; }
-        public List<OrderProduct> Products { get; private set; }
+        public ICollection<OrderProduct> Products { get; private set; }
         public StatusEnum Status { get; private set; }
         public double Total { get; set; }
         public DateTime CreatedAt { get; private set; }
@@ -18,7 +18,7 @@ namespace Domain.order.entity
 
         public Order() { }
         
-        public Order(Guid id, List<OrderProduct> products, StatusEnum status, DateTime createdAt, DateTime updatedAt)
+        public Order(Guid id, ICollection<OrderProduct> products, StatusEnum status, DateTime createdAt, DateTime updatedAt)
         {
             Id = id;
             Products = products;

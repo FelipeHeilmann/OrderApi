@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<ICollection<Product>>> GetProducts()
         {
             var products = await _getProducts.Execute();
 

@@ -27,7 +27,7 @@ namespace API.controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Order>>> GetAll()
+        public async Task<ActionResult<ICollection<OrderResponse>>> GetAll()
         {
             var orders = await _getAll.Execute();
 

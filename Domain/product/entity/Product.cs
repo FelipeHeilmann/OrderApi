@@ -5,12 +5,12 @@ namespace Domain.product.entity
     public class Product
     {
         public Guid Id { get; private set; }
-        public String Name { get; private set; }
-        public String Description { get; private set; }
-        public String ImagePath { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string ImagePath { get; private set; }
         public Double Price { get; private set; }
 
-        public Product(Guid id, String name, String description, String imagePath, Double price)
+        public Product(Guid id, string name, string description, string imagePath, Double price)
         {
             Id = id;
             Name = name;
@@ -19,7 +19,7 @@ namespace Domain.product.entity
             Price = price;
         }
 
-        public static Product Create(String name, String description, String imagePath, double price)
+        public static Product Create(string name, string description, string imagePath, double price)
         {
             return new Product(new Guid(), name, description, imagePath, price);
         }
