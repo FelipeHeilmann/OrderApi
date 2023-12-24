@@ -12,7 +12,7 @@ namespace Domain.order.entity
         public Guid Id { get; private set; }
         public ICollection<OrderProduct> Products { get; private set; }
         public StatusEnum Status { get; private set; }
-        public double Total { get; set; }
+        public double Total { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
@@ -35,6 +35,7 @@ namespace Domain.order.entity
         public void AddItem(OrderProduct product)
         {
             Products.Add(product);
+            Total += product.Quantity * product.Product.Price;
         }
     }
 }

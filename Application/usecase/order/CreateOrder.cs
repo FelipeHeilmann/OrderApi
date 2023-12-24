@@ -31,7 +31,6 @@ namespace Application.usecase.order
             foreach (var orderProduct in request)
             {
                 var product = await _productRepository.Get(orderProduct.ProductId);
-                order.Total += Math.Round(product.Price * orderProduct.Quantity, 2);
                 order.AddItem(OrderProduct.Create(order.Id, product.Id, product, orderProduct.Quantity));
             }
 
